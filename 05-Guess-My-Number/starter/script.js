@@ -11,13 +11,13 @@ const score = document.querySelector('.score');
 const highScore = document.querySelector('.highscore');
 const tryAgain = document.querySelector('.btn.again');
 const body = document.querySelector('body');
+const number = document.querySelector('.number');
 let curScore = 20;
 let maxScore = 0;
 let finalScore;
 
 userClick.addEventListener('click', () => {
   const userValue = Number(userGuess.value);
-
   // === change css and display number ; and store that number(highest)
   if (userValue === targetNumber) {
     message.innerText = 'Correct Number';
@@ -27,12 +27,12 @@ userClick.addEventListener('click', () => {
     }
     highScore.innerText = maxScore;
     body.style.backgroundColor = '#60b347';
+    number.innerText = targetNumber;
     //2.1 1== reduce score and, > target too high, < target too low;
-  } else if (userValue > targetNumber) {
-    message.innerText = 'Too high';
-    curScore -= 1;
   } else {
-    message.innerText = 'Too low';
+    userValue > targetNumber
+      ? (message.innerText = 'Too high')
+      : (message.innerText = 'Too low');
     curScore -= 1;
   }
   score.innerText = curScore;
@@ -49,4 +49,5 @@ tryAgain.addEventListener('click', () => {
   userGuess.value = '0';
   score.innerText = curScore;
   highScore.innerText = maxScore;
+  number.innerText = '?';
 });
